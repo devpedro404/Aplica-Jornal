@@ -1,0 +1,274 @@
+# Dependências
+/node_modules
+/.pnp
+.pnp.js
+.pnp.mjs
+.pnp.cjs
+
+# Testes
+/coverage
+/.nyc_output
+
+# Build
+/build
+/dist
+/.next
+/out
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Arquivos do sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Arquivos de build do React
+/build
+/static
+
+# Arquivos de configuração do usuário
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Arquivos de debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de relatórios
+coverage/
+.nyc_output/
+
+# Dependências
+node_modules/
+jspm_packages/
+
+# Arquivos de tipo
+*.tsbuildinfo
+
+# Arquivos do Next.js
+.next/
+out/
+
+# Arquivos do Nuxt.js
+.nuxt/
+dist/
+
+# Arquivos do Gatsby
+.cache/
+public/
+
+# Arquivos do Storybook
+storybook-static/
+
+# Arquivos do Firebase
+.firebase/
+
+# Arquivos do Jest
+/jest-results.json
+
+# Arquivos do ESLint
+.eslintcache
+
+# Arquivos do Prettier
+.prettiercache
+
+# Arquivos do Stylelint
+.stylelintcache
+
+# Arquivos do Babel
+babel.config.js
+
+# Arquivos do Webpack
+/webpack-stats.json
+
+# Arquivos do Vite
+/vite.config.js.timestamp-*
+
+# Arquivos do Electron
+/dist-electron/
+
+# Arquivos do Expo
+.expo/
+
+# Arquivos do React Native
+/android/
+/ios/
+
+# Arquivos do Flutter
+/pubspec.lock
+
+# Arquivos do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Arquivos do Ruby
+*.gem
+*.rbc
+/.bundle
+
+# Arquivos do Java
+*.class
+*.jar
+
+# Arquivos do PHP
+composer.lock
+vendor/
+
+# Arquivos do Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Arquivos do Rust
+/target/
+
+# Arquivos do Swift
+*.xcodeproj
+*.xcworkspace
+
+# Arquivos do C#
+bin/
+obj/
+
+# Arquivos do Docker
+.dockerignore
+
+# Arquivos do Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Arquivos do Kubernetes
+*.kubeconfig
+
+# Arquivos do Ansible
+*.retry
+
+# Arquivos do Vagrant
+.vagrant/
+
+# Arquivos do VirtualBox
+*.vdi
+*.vmdk
+
+# Arquivos do VMware
+*.vmx
+*.vmxf
+
+# Arquivos do Parallels
+*.pvm
+
+# Arquivos do QEMU
+*.qcow2
+
+# Arquivos do Vagrant
+.vagrant/
+
+# Arquivos do Packer
+packer_cache/
+
+# Arquivos do Vagrant Cloud
+.vagrant.d/
+
+# Arquivos do Vagrant VMware
+.vagrant/
+
+# Arquivos do Vagrant VirtualBox
+.vagrant/
+
+# Arquivos do Vagrant Parallels
+.vagrant/
+
+# Arquivos do Vagrant Hyper-V
+.vagrant/
+
+# Arquivos do Vagrant libvirt
+.vagrant/
+
+# Arquivos do Vagrant KVM
+.vagrant/
+
+# Arquivos do Vagrant LXC
+.vagrant/
+
+# Arquivos do Vagrant Docker
+.vagrant/
+
+# Arquivos do Vagrant Podman
+.vagrant/
+
+# Arquivos do Vagrant WSL
+.vagrant/
+
+# Arquivos do Vagrant Cloud
+.vagrant.d/
+
+# Arquivos do Vagrant VMware
+.vagrant/
+
+# Arquivos do Vagrant VirtualBox
+.vagrant/
+
+# Arquivos do Vagrant Parallels
+.vagrant/
+
+# Arquivos do Vagrant Hyper-V
+.vagrant/
+
+# Arquivos do Vagrant libvirt
+.vagrant/
+
+# Arquivos do Vagrant KVM
+.vagrant/
+
+# Arquivos do Vagrant LXC
+.vagrant/
+
+# Arquivos do Vagrant Docker
+.vagrant/
+
+# Arquivos do Vagrant Podman
+.vagrant/
+
+# Arquivos do Vagrant WSL
+.vagrant/

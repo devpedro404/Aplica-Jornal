@@ -1,0 +1,572 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;700;800&family=Literata:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@layer base {
+  body {
+    min-height: max(884px, 100dvh);
+  }
+}
+
+@layer components {
+  .glass-nav {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .text-shadow-hero {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+  
+  .news-ticker-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f3d2e;
+  border-radius: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 20px rgba(15, 61, 46, 0.05);
+}
+
+/* Admin - Correções de contraste */
+.bg-primary-container {
+  background-color: #0f3d2e !important;
+}
+
+.text-on-primary-container {
+  color: #7ba894 !important;
+}
+
+.bg-primary-container .text-white,
+.bg-primary-container .text-on-primary {
+  color: #ffffff !important;
+}
+
+.admin-card-text {
+  color: #191c1d !important;
+}
+
+.admin-label {
+  color: #414944 !important;
+  font-weight: 500 !important;
+}
+
+.admin-value {
+  color: #00261a !important;
+  font-weight: 600 !important;
+}
+
+input[type="checkbox"].sr-only:checked + div {
+  background-color: #1e6b4c !important;
+}
+
+input[type="checkbox"].sr-only + div {
+  background-color: #c0c8c3 !important;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"].sr-only + div:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: white !important;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"].sr-only:checked + div:after {
+  transform: translateX(14px);
+}
+
+select, 
+input, 
+textarea {
+  background-color: #ffffff !important;
+  color: #191c1d !important;
+  border-color: #c0c8c3 !important;
+}
+
+select:focus, 
+input:focus, 
+textarea:focus {
+  border-color: #1e6b4c !important;
+  outline: none !important;
+  ring-color: #1e6b4c !important;
+}
+
+select option {
+  background-color: #ffffff !important;
+  color: #191c1d !important;
+}
+
+.btn-outline {
+  background-color: transparent !important;
+  border: 1px solid #1e6b4c !important;
+  color: #1e6b4c !important;
+}
+
+.btn-outline:hover {
+  background-color: #1e6b4c !important;
+  color: #ffffff !important;
+}
+
+.text-on-surface {
+  color: #191c1d !important;
+}
+
+.text-on-surface-variant {
+  color: #414944 !important;
+}
+
+.text-secondary {
+  color: #1e6b4c !important;
+}
+
+.text-primary {
+  color: #00261a !important;
+}
+
+/* ============================================
+   TEMA ESCURO - MANTENDO IDENTIDADE
+   ============================================ */
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #e5e5e5;
+}
+
+.dark body {
+  background-color: #121212;
+  color: #e5e5e5;
+}
+
+/* Fundos escuros */
+.dark .bg-white,
+.dark .bg-surface,
+.dark .bg-background,
+.dark .bg-gray-50,
+.dark .bg-gray-100,
+.dark .bg-gray-800,
+.dark .bg-gray-900,
+.dark .bg-surface-container,
+.dark .bg-surface-container-low,
+.dark .bg-surface-container-lowest,
+.dark .bg-surface-container-high,
+.dark .bg-white.rounded-xl,
+.dark .bg-white.rounded-lg,
+.dark .bg-white.shadow-lg,
+.dark .bg-white.shadow-sm,
+.dark aside.bg-surface,
+.dark .bg-white.dark\:bg-gray-800 {
+  background-color: #1a1a1a !important;
+}
+
+/* Header escuro */
+.dark header,
+.dark .fixed.top-0,
+.dark .bg-white\/90,
+.dark .backdrop-blur-xl {
+  background-color: #1a1a1a !important;
+  border-bottom-color: #2a2a2a !important;
+}
+
+/* Ícones do header - BRANCOS */
+.dark header .material-symbols-outlined {
+  color: #ffffff !important;
+}
+
+.dark header button:hover .material-symbols-outlined {
+  color: #cccccc !important;
+}
+
+/* Links do menu do header - BRANCOS */
+.dark header nav a,
+.dark header .menu-item {
+  color: #e0e0e0 !important;
+}
+
+.dark header nav a:hover,
+.dark header .menu-item:hover {
+  color: #ffffff !important;
+}
+
+/* Textos principais - BRANCOS */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark .font-bold, .dark .font-semibold,
+.dark .font-headline-lg, .dark .font-headline-md, .dark .font-display-lg,
+.dark .text-primary,
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
+  color: #ffffff !important;
+}
+
+.dark p, .dark span, .dark li,
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-gray-400,
+.dark .text-on-surface-variant {
+  color: #c0c0c0 !important;
+}
+
+/* APENAS LINKS PRINCIPAIS FICAM VERDES */
+.dark a:not(header a):not(.no-green) {
+  color: #4ade80 !important;
+}
+
+.dark a:not(header a):not(.no-green):hover {
+  color: #22c55e !important;
+}
+
+/* Botão "Ver todos os vídeos" - BRANCO/CINZA (não verde) */
+.dark .text-secondary:where(.video-link, [class*="video"]) {
+  color: #c0c0c0 !important;
+}
+
+.dark button:not(.bg-secondary):not(.bg-primary) {
+  color: #e0e0e0 !important;
+}
+
+/* Botão "Ver ranking completo" - BRANCO */
+.dark .ranking-button,
+.dark button.border-primary {
+  color: #e0e0e0 !important;
+  border-color: #4ade80 !important;
+}
+
+.dark .ranking-button:hover,
+.dark button.border-primary:hover {
+  background-color: #4ade80 !important;
+  color: #1a1a1a !important;
+}
+
+/* Categorias verdes - manter */
+.dark .text-secondary {
+  color: #4ade80 !important;
+}
+
+/* Bordas */
+.dark .border,
+.dark .border-t,
+.dark .border-b,
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-300,
+.dark .border-outline-variant {
+  border-color: #2a2a2a !important;
+}
+
+/* Cards - SEM EFEITO VERDE NO HOVER */
+.dark article,
+.dark .card,
+.dark .rounded-xl,
+.dark .rounded-lg {
+  background-color: #1a1a1a !important;
+  border-color: #2a2a2a !important;
+}
+
+/* Inputs */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #2a2a2a !important;
+  border-color: #3a3a3a !important;
+  color: #ffffff !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #888888 !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #4ade80 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2) !important;
+}
+
+/* Botões principais - VERDES */
+.dark button.bg-primary,
+.dark .bg-primary {
+  background-color: #1e6b4c !important;
+  color: #ffffff !important;
+}
+
+.dark button.bg-primary:hover,
+.dark .bg-primary:hover {
+  background-color: #15573e !important;
+}
+
+.dark .bg-secondary {
+  background-color: #22c55e !important;
+  color: #ffffff !important;
+}
+
+.dark .bg-secondary:hover {
+  background-color: #16a34a !important;
+}
+
+/* Footer */
+.dark footer.bg-primary {
+  background-color: #0a1a15 !important;
+}
+
+.dark footer .text-on-primary {
+  color: #e5e5e5 !important;
+}
+
+.dark footer .text-on-primary\/70 {
+  color: #888888 !important;
+}
+
+/* Menu drawer */
+.dark .drawer-menu,
+.dark .fixed.top-0.left-0.bg-white {
+  background-color: #1a1a1a !important;
+}
+
+.dark .drawer-menu a:hover {
+  background-color: #1e6b4c !important;
+}
+
+/* Mais Lidas - SEM VERDE NO HOVER */
+.dark .text-gray-500,
+.dark .text-gray-600 {
+  color: #888888 !important;
+}
+
+.dark .group:hover .text-gray-500,
+.dark .group:hover .text-gray-600 {
+  color: #888888 !important;
+}
+
+.dark .group:hover h4 {
+  color: #ffffff !important;
+}
+
+/* Newsletter */
+.dark .bg-primary-container {
+  background-color: #0a2b1f !important;
+}
+
+.dark .bg-primary-container h2,
+.dark .bg-primary-container p {
+  color: #ffffff !important;
+}
+
+.dark .bg-primary-container button {
+  background-color: #22c55e !important;
+}
+
+.dark .bg-primary-container button:hover {
+  background-color: #16a34a !important;
+}
+
+/* Ticker Urgente */
+.dark .bg-red-600 {
+  background-color: #991b1b !important;
+}
+
+.dark .urgent-label {
+  background-color: #000000 !important;
+  color: #ef4444 !important;
+}
+
+.dark .news-ticker-mask span {
+  color: #ffffff !important;
+}
+
+/* Scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* Admin escuro */
+.dark .bg-gray-50 {
+  background-color: #111111 !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: #1a1a1a !important;
+}
+
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-gray-400 {
+  color: #a0a0a0 !important;
+}
+
+.dark .text-gray-700,
+.dark .text-gray-800 {
+  color: #e0e0e0 !important;
+}
+
+.dark .bg-primary {
+  background-color: #1e6b4c !important;
+}
+
+.dark .bg-primary:hover {
+  background-color: #15573e !important;
+}
+
+/* Checkbox */
+.dark input[type="checkbox"].sr-only + div {
+  background-color: #3a3a3a !important;
+}
+
+.dark input[type="checkbox"].sr-only:checked + div {
+  background-color: #22c55e !important;
+}
+
+/* Hero carousel */
+.dark .bg-black\/20,
+.dark .bg-black\/50 {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark .hero-gradient {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%) !important;
+}
+
+/* Header com scroll transparente */
+header {
+  transition: all 0.3s ease-in-out !important;
+}
+
+header.bg-white\/80,
+header.backdrop-blur-md {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.dark header.bg-white\/80,
+.dark header.backdrop-blur-md {
+  background-color: rgba(26, 26, 26, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ============================================
+   REMOVER TODO EFEITO VERDE DOS CARDS
+   ============================================ */
+
+/* Remove qualquer efeito de hover nos cards */
+article:hover,
+.card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+/* Remove qualquer cor verde nos títulos ao passar o mouse */
+article:hover h3,
+article:hover h4,
+.card:hover h3,
+.card:hover h4,
+article:hover .font-bold,
+.card:hover .font-bold {
+  color: inherit !important;
+}
+
+/* Remove borda verde no dark mode */
+.dark article:hover,
+.dark .card:hover {
+  border-color: #2a2a2a !important;
+}
+
+/* Remove qualquer efeito de escala ou movimento */
+article,
+.card-clickable,
+.cursor-pointer {
+  transition: none !important;
+}
+
+/* Remove efeito verde dos links dentro dos cards */
+article a:hover,
+.card a:hover {
+  color: inherit !important;
+}
+
+/* Remove efeito verde do "Mais Lidas" */
+.dark .group:hover h4 {
+  color: #ffffff !important;
+}
+
+.dark .group:hover .text-gray-500,
+.dark .group:hover .text-gray-600 {
+  color: #888888 !important;
+}
+
