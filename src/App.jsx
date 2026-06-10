@@ -5,8 +5,18 @@ import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './admin/components/ProtectedRoute';
 import Layout from './components/Layout';
 
-// Importações das páginas
+// Páginas Públicas
 import Home from './pages/Home';
+import Politica from './pages/Politica';
+import Ambiente from './pages/Ambiente';
+import Cultura from './pages/Cultura';
+import Negocios from './pages/Negocios';
+import Seguranca from './pages/Seguranca';
+import TodasNoticias from './pages/TodasNoticias';
+import Videos from './pages/Videos';
+import ArticleDetail from './pages/article/ArticleDetail';
+import Opiniao from './pages/Opiniao';
+import Geral from './pages/Geral';
 
 // Admin Pages
 import Login from './admin/pages/Login';
@@ -27,6 +37,16 @@ function App() {
           <Routes>
             {/* Rotas Públicas */}
             <Route path="/" element={<Layout><Home /></Layout>} />
+            <Route path="/politica" element={<Layout><Politica /></Layout>} />
+            <Route path="/ambiente" element={<Layout><Ambiente /></Layout>} />
+            <Route path="/cultura" element={<Layout><Cultura /></Layout>} />
+            <Route path="/negocios" element={<Layout><Negocios /></Layout>} />
+            <Route path="/seguranca" element={<Layout><Seguranca /></Layout>} />
+            <Route path="/opiniao" element={<Layout><Opiniao /></Layout>} />
+            <Route path="/geral" element={<Layout><Geral /></Layout>} />
+            <Route path="/todas-noticias" element={<Layout><TodasNoticias /></Layout>} />
+            <Route path="/videos" element={<Layout><Videos /></Layout>} />
+            <Route path="/article/:id" element={<Layout><ArticleDetail /></Layout>} />
 
             {/* Rotas do Admin */}
             <Route path="/admin/login" element={<Login />} />

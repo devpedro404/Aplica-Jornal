@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewsCard from '../components/NewsCard';
 import VideoCard from '../components/VideoCard';
@@ -9,22 +9,32 @@ import { getActiveVideos } from '../data/videosData';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [featuredNews, setFeaturedNews] = useState([]);
+  const [secondaryNews, setSecondaryNews] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Pega todos os artigos usando a função correta
-  const allArticles = getAllArticles();
-  
-  // Pega os artigos em destaque (isHero = true) para as Principais Coberturas
-  const featuredNews = allArticles
-    .filter(article => article.isHero === true && article.page === 'home')
-    .slice(0, 4);
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  // Pega os artigos secundários (não destaque) para a grid abaixo
-  const secondaryNews = allArticles
-    .filter(article => article.isHero !== true && article.page === 'home')
-    .slice(0, 3);
-
-  // Pega os vídeos ativos
-  const videos = getActiveVideos ? getActiveVideos().slice(0, 5) : [];
+  const loadData = () => {
+    try {
+      const allArticles = getAllArticles();
+      const homeArticles = allArticles.filter(a => a.page === 'home');
+      const featured = homeArticles.filter(a => a.isHero === true).slice(0, 4);
+      const secondary = homeArticles.filter(a => a.isHero !== true).slice(0, 3);
+      setFeaturedNews(featured);
+      setSecondaryNews(secondary);
+      
+      const activeVideos = getActiveVideos();
+      setVideos(activeVideos.slice(0, 5));
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const trendingTopics = [
     { rank: "01", title: "A corrida pelo Ouro Branco: O lítio e o impacto nas terras baixas.", category: "Tecnologia", id: 7 },
@@ -40,27 +50,34 @@ const Home = () => {
     navigate('/videos');
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full max-w-[1280px] mx-auto px-4 md:px-8 pt-8 pb-32">
+    <div className="w-full max-w-[1280px] mx-auto px-4 pt-8 pb-32">
       
-      {/* Hero Carousel */}
       <HeroCarousel />
 
       {/* Main News Grid */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12">
-        <div className="md:col-span-8 space-y-6">
-          <h2 className="font-headline-lg text-headline-lg flex items-center gap-3 mb-4">
-            <span className="w-8 h-1 bg-secondary rounded-full"></span>
+        <div className="md:col-span-8">
+          <h2 className="text-2xl font-bold flex items-center gap-3 mb-6">
+            <span className="w-8 h-1 bg-green-600 rounded-full"></span>
             Principais Coberturas
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featuredNews.length > 0 ? (
               featuredNews.map((news) => (
-                <NewsCard key={news.id} {...news} onReadMore={() => handleReadMore(news.id)} />
+                <NewsCard key={news.id} {...news} />
               ))
             ) : (
               <div className="col-span-2 text-center py-10 text-gray-400">
-                Nenhum artigo em destaque. Clique em "Destaques" no admin para selecionar.
+                Nenhum artigo em destaque.
               </div>
             )}
           </div>
@@ -68,88 +85,67 @@ const Home = () => {
 
         {/* Sidebar "Mais Lidas" */}
         <aside className="md:col-span-4">
-          <div className="bg-surface-container-low rounded-xl p-8 border border-outline-variant/10 sticky top-24">
-            <h2 className="font-headline-md text-headline-md mb-8 flex items-center justify-between">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+            <h3 className="text-2xl font-bold mb-8 flex items-center justify-between">
               Mais Lidas
-              <span className="material-symbols-outlined text-secondary">trending_up</span>
-            </h2>
+              {/* Ícone trending_up na cor VERDE (#1e6b4c) */}
+              <span className="material-symbols-outlined text-[#1e6b4c] text-3xl">trending_up</span>
+            </h3>
             <div className="space-y-8">
-              {trendingTopics.map((topic, index) => (
+              {trendingTopics.map((topic, idx) => (
                 <div 
-                  key={index} 
+                  key={idx} 
+                  className="flex gap-5 cursor-pointer group" 
                   onClick={() => handleReadMore(topic.id)}
-                  className="flex gap-6 group cursor-pointer"
                 >
-                  <span className="text-4xl font-display-lg text-secondary-container font-black leading-none group-hover:text-secondary transition-colors">
+                  <span className="text-4xl font-black text-gray-300 group-hover:text-[#1e6b4c] transition-colors">
                     {topic.rank}
                   </span>
-                  <div>
-                    <h4 className="font-body-lg font-semibold leading-snug group-hover:underline">
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-[#1e6b4c] transition-colors leading-relaxed">
                       {topic.title}
-                    </h4>
-                    <p className="text-xs text-on-surface-variant/60 mt-2 font-label-md uppercase tracking-widest">
-                      {topic.category}
                     </p>
+                    <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold mt-2 inline-block">
+                      {topic.category}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
+            {/* Botão VER RANKING COMPLETO na cor VERDE */}
             <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="w-full mt-12 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all uppercase text-xs tracking-widest"
+              onClick={() => navigate('/todas-noticias')}
+              className="w-full mt-10 py-4 border-2 border-[#1e6b4c] text-[#1e6b4c] rounded-xl text-base font-bold hover:bg-[#1e6b4c] hover:text-white transition-colors"
             >
-              Ver Ranking Completo
+              VER RANKING COMPLETO
             </button>
           </div>
         </aside>
       </div>
 
       {/* Secondary News Grid */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {secondaryNews.length > 0 ? (
-          secondaryNews.map((news) => (
-            <NewsCard key={news.id} {...news} onReadMore={() => handleReadMore(news.id)} />
-          ))
-        ) : (
-          <div className="col-span-3 text-center py-10 text-gray-400">
-            Nenhum artigo secundário encontrado.
-          </div>
-        )}
-      </div>
+      {secondaryNews.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {secondaryNews.map((news) => (
+            <NewsCard key={news.id} {...news} />
+          ))}
+        </div>
+      )}
 
-      {/* Video Section - AMAZÔNIA EM FOCO */}
-      <section className="mt-20">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="font-headline-lg text-headline-lg text-primary">Amazônia em Foco</h2>
-            <p className="text-sm text-on-surface-variant mt-1">Vídeos e documentários sobre a maior floresta tropical do mundo</p>
-          </div>
-          <button 
-            onClick={handleViewAllVideos}
-            className="text-secondary font-label-md text-label-md flex items-center gap-2 hover:underline transition-all group"
-          >
-            Ver todos os vídeos
-            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      {/* Video Section */}
+      <section className="mt-16">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">Amazônia em Foco</h2>
+          <button onClick={handleViewAllVideos} className="text-[#1e6b4c] hover:underline text-sm">
+            Ver todos os vídeos →
           </button>
         </div>
-        
-        <div className="flex overflow-x-auto gap-6 pb-8 snap-x no-scrollbar scrollbar-thin scrollbar-thumb-secondary scrollbar-track-gray-200">
+        <div className="flex overflow-x-auto gap-6 pb-4">
           {videos.length > 0 ? (
-            videos.map((video) => (
-              <VideoCard key={video.id} {...video} />
-            ))
+            videos.map((video) => <VideoCard key={video.id} {...video} />)
           ) : (
-            <div className="w-full text-center py-10 text-gray-400">
-              Nenhum vídeo cadastrado. Acesse o admin para adicionar vídeos.
-            </div>
+            <p className="text-gray-400">Nenhum vídeo cadastrado.</p>
           )}
-        </div>
-
-        {/* Indicador de scroll (opcional) */}
-        <div className="flex justify-center gap-1 mt-4 md:hidden">
-          {videos.map((_, index) => (
-            <div key={index} className="w-1.5 h-1.5 rounded-full bg-outline-variant/50"></div>
-          ))}
         </div>
       </section>
 

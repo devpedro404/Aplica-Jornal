@@ -19,15 +19,6 @@ const NewsCard = ({ id, title, description, category, author, date, readTime, im
       'Urbana': '#1e6b4c',
       'Direitos': '#ba1a1a',
       'Biodiversidade': '#1e6b4c',
-      'Diário de Campo': '#4a6fa5',
-      'Grande Reportagem': '#4a6fa5',
-      'Pecuária Regenerativa': '#4a6fa5',
-      'Agrotech': '#4a6fa5',
-      'Investimentos ESG': '#1e6b4c',
-      'Investigação Especial': '#ba1a1a',
-      'Destaque Cultural': '#C5A059',
-      'Artes Originárias': '#C5A059',
-      'Crise Climática': '#1e6b4c',
       default: '#1e6b4c',
     };
     return colors[cat] || colors.default;

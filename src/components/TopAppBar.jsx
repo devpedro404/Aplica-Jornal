@@ -16,8 +16,8 @@ const TopAppBar = ({ onMenuClick }) => {
 
   const getNavLinkClass = (path) => {
     return location.pathname === path
-      ? 'font-label-md text-label-md text-secondary dark:text-white font-bold'
-      : 'font-label-md text-label-md text-gray-700 dark:text-gray-300 hover:text-secondary dark:hover:text-white';
+      ? 'font-label-md text-label-md text-green-700 dark:text-green-400 font-bold'
+      : 'font-label-md text-label-md text-gray-700 dark:text-gray-300 hover:text-green-700 dark:hover:text-green-400';
   };
 
   return (
@@ -58,7 +58,7 @@ const TopAppBar = ({ onMenuClick }) => {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Links com react-router-dom */}
         <div className="hidden md:flex items-center gap-6 ml-4">
           <Link to="/politica" className={getNavLinkClass('/politica')}>
             Política

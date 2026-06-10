@@ -4,6 +4,7 @@ import { getYouTubeId } from '../data/videosData';
 
 const VideoCard = ({ id, title, videoUrl, imageUrl, imageAlt, category, description }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const navigate = useNavigate();
 
   const handlePlay = (e) => {
@@ -18,6 +19,9 @@ const VideoCard = ({ id, title, videoUrl, imageUrl, imageAlt, category, descript
       navigate(`/video/${id}`);
     }
   };
+
+  // Placeholder image
+  const placeholderImage = 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400';
 
   if (isPlaying && videoUrl) {
     const videoId = getYouTubeId(videoUrl);
@@ -44,11 +48,19 @@ const VideoCard = ({ id, title, videoUrl, imageUrl, imageAlt, category, descript
       onClick={handleCardClick}
       className="flex-shrink-0 w-[320px] md:w-[450px] snap-start group cursor-pointer"
     >
-      <div className="relative aspect-video rounded-xl overflow-hidden mb-4">
-        <div
-          className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
-          style={{ backgroundImage: `url(${imageUrl || `https://img.youtube.com/vi/${getYouTubeId(videoUrl)}/maxresdefault.jpg`})` }}
-        />
+      <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-gray-200">
+        {!imgError ? (
+          <img
+            src={imageUrl || placeholderImage}
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+            <span className="material-symbols-outlined text-white text-5xl">videocam</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div
