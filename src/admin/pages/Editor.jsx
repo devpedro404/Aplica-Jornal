@@ -15,23 +15,28 @@ const Editor = ({ editingArticle = null }) => {
   const [metaDescription, setMetaDescription] = useState(editingArticle?.metaDescription || '');
   const [imagePreview, setImagePreview] = useState(editingArticle?.imageUrl || null);
   const [featuredImage, setFeaturedImage] = useState(null);
-  const [allowComments, setAllowComments] = useState(editingArticle?.allowComments !== false);
-  const [isPremium, setIsPremium] = useState(editingArticle?.isPremium || false);
   const [isHero, setIsHero] = useState(editingArticle?.isHero || false);
-  const [page, setPage] = useState(editingArticle?.page || 'home');
+  const [publishOnHome, setPublishOnHome] = useState(editingArticle?.pages?.includes('home') || false);
+  const [selectedPages, setSelectedPages] = useState({
+    politica: editingArticle?.pages?.includes('politica') || false,
+    ambiente: editingArticle?.pages?.includes('ambiente') || false,
+    cultura: editingArticle?.pages?.includes('cultura') || false,
+    negocios: editingArticle?.pages?.includes('negocios') || false,
+    seguranca: editingArticle?.pages?.includes('seguranca') || false,
+  });
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [author, setAuthor] = useState(editingArticle?.author || '');
 
   const categories = ['Selecione uma categoria...', 'Política', 'Ambiente', 'Tecnologia', 'Cultura', 'Economia', 'Investigações', 'Exclusivo', 'Sustentabilidade'];
-  const pages = [
-    { value: 'home', label: 'Home (Página Inicial)' },
-    { value: 'politica', label: 'Política' },
-    { value: 'ambiente', label: 'Ambiente' },
-    { value: 'cultura', label: 'Cultura' },
-    { value: 'negocios', label: 'Negócios' },
-    { value: 'seguranca', label: 'Segurança' }
+
+  const pageOptions = [
+    { id: 'politica', label: 'Política', icon: 'policy' },
+    { id: 'ambiente', label: 'Ambiente', icon: 'forest' },
+    { id: 'cultura', label: 'Cultura', icon: 'theater_comedy' },
+    { id: 'negocios', label: 'Negócios', icon: 'payments' },
+    { id: 'seguranca', label: 'Segurança', icon: 'security' }
   ];
 
   const showMessage = (message) => {
@@ -61,6 +66,21 @@ const Editor = ({ editingArticle = null }) => {
     }
   };
 
+  const handlePageToggle = (pageId) => {
+    setSelectedPages(prev => ({
+      ...prev,
+      [pageId]: !prev[pageId]
+    }));
+  };
+
+  const handleHomeToggle = (e) => {
+    setPublishOnHome(e.target.checked);
+  };
+
+  const handleHeroToggle = (e) => {
+    setIsHero(e.target.checked);
+  };
+
   const handleSave = (isDraft = false) => {
     if (!title.trim()) {
       showMessage('Por favor, insira um título para a matéria!');
@@ -74,6 +94,33 @@ const Editor = ({ editingArticle = null }) => {
 
     setIsSubmitting(true);
 
+    // Montar array com todas as páginas selecionadas
+    const pages = [];
+    
+    // Adicionar páginas específicas selecionadas
+    Object.keys(selectedPages).forEach(pageId => {
+      if (selectedPages[pageId]) {
+        pages.push(pageId);
+      }
+    });
+    
+    // Adicionar Home se selecionada
+    if (publishOnHome) {
+      pages.push('home');
+    }
+    
+    // Se nenhuma página foi selecionada, usar a primeira como padrão
+    if (pages.length === 0) {
+      pages.push('politica');
+    }
+
+    console.log('💾 ========== SALVANDO ARTIGO ==========');
+    console.log('   📌 Páginas selecionadas:', pages);
+    console.log('   📌 isHero:', isHero);
+    console.log('   📌 Título:', title);
+    console.log('   📌 Categoria:', category);
+    console.log('========================================');
+
     const articleData = {
       title: title.trim(),
       description: subtitle.trim(),
@@ -83,10 +130,10 @@ const Editor = ({ editingArticle = null }) => {
       tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
       slug: slug.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       metaDescription: metaDescription.trim() || subtitle.trim(),
-      allowComments: allowComments,
-      isPremium: isPremium,
+      allowComments: true,
+      isPremium: false,
       isHero: isHero,
-      page: page,
+      pages: pages,  // ← Array com todas as páginas onde o artigo vai aparecer
       imageUrl: imagePreview || 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800',
       readTime: Math.ceil((content.length || 0) / 1000) || 5
     };
@@ -110,10 +157,15 @@ const Editor = ({ editingArticle = null }) => {
         setImagePreview(null);
         setFeaturedImage(null);
         setAuthor('');
-        setAllowComments(true);
-        setIsPremium(false);
         setIsHero(false);
-        setPage('home');
+        setPublishOnHome(false);
+        setSelectedPages({
+          politica: false,
+          ambiente: false,
+          cultura: false,
+          negocios: false,
+          seguranca: false,
+        });
       }
     }
 
@@ -324,72 +376,66 @@ const Editor = ({ editingArticle = null }) => {
               <p className="text-[10px] text-gray-500 mt-2">Define em qual seção do site a matéria aparecerá.</p>
             </div>
 
-            {/* Page Selection */}
-            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-              <label className="text-xs font-semibold text-gray-500 uppercase block mb-2">
-                Página de Destino
-              </label>
-              <select
-                value={page}
-                onChange={(e) => setPage(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm appearance-none"
-              >
-                {pages.map(p => (
-                  <option key={p.value} value={p.value}>{p.label}</option>
-                ))}
-              </select>
-              <p className="text-[10px] text-gray-500 mt-2">Onde este artigo será exibido.</p>
-            </div>
-
-            {/* Configurações Extras */}
+            {/* CONFIGURAÇÕES - COM MÚLTIPLAS PÁGINAS */}
             <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 space-y-4">
-              <h4 className="text-xs font-semibold text-gray-500 uppercase">Configurações</h4>
+              <h4 className="text-xs font-semibold text-gray-500 uppercase">Páginas de Destino</h4>
+              <p className="text-[10px] text-gray-400 mb-2">Selecione onde este artigo será exibido</p>
               
-              {/* Destaque Principal */}
+              {/* Opções de páginas específicas */}
+              <div className="space-y-3">
+                {pageOptions.map(page => (
+                  <div key={page.id} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-gray-500 text-sm">{page.icon}</span>
+                      <span className="text-sm text-gray-700">{page.label}</span>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedPages[page.id]}
+                        onChange={() => handlePageToggle(page.id)}
+                        className="sr-only peer" 
+                      />
+                      <div className="w-10 h-5 bg-gray-300 peer-focus:ring-2 peer-focus:ring-green-500/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divisória */}
+              <div className="border-t border-gray-100 my-2"></div>
+
+              {/* Home Toggle */}
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-sm text-gray-700 block">Destaque Principal (Hero)</span>
+                  <span className="text-sm font-semibold text-gray-700 block">Página Inicial (Home)</span>
+                  <p className="text-[10px] text-gray-400">O artigo aparecerá na Home do site</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={publishOnHome}
+                    onChange={handleHomeToggle}
+                    className="sr-only peer" 
+                  />
+                  <div className="w-10 h-5 bg-gray-300 peer-focus:ring-2 peer-focus:ring-green-500/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                </label>
+              </div>
+
+              {/* Divisória */}
+              <div className="border-t border-gray-100 my-2"></div>
+
+              {/* Destaque Principal (Hero) */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-semibold text-gray-700 block">Destaque Principal (Hero)</span>
                   <p className="text-[10px] text-gray-400">Aparece no carrossel principal da Home</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input 
                     type="checkbox" 
                     checked={isHero}
-                    onChange={(e) => setIsHero(e.target.checked)}
-                    className="sr-only peer" 
-                  />
-                  <div className="w-10 h-5 bg-gray-300 peer-focus:ring-2 peer-focus:ring-green-500/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
-                </label>
-              </div>
-
-              {/* Permitir Comentários */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-sm text-gray-700 block">Permitir Comentários</span>
-                  <p className="text-[10px] text-gray-400">Leitores podem comentar na matéria</p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    checked={allowComments}
-                    onChange={(e) => setAllowComments(e.target.checked)}
-                    className="sr-only peer" 
-                  />
-                  <div className="w-10 h-5 bg-gray-300 peer-focus:ring-2 peer-focus:ring-green-500/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
-                </label>
-              </div>
-
-              {/* Matéria Premium */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-sm text-gray-700 block">Matéria Premium (Paywall)</span>
-                  <p className="text-[10px] text-gray-400">Conteúdo restrito para assinantes</p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    checked={isPremium}
-                    onChange={(e) => setIsPremium(e.target.checked)}
+                    onChange={handleHeroToggle}
                     className="sr-only peer" 
                   />
                   <div className="w-10 h-5 bg-gray-300 peer-focus:ring-2 peer-focus:ring-green-500/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>

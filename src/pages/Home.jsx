@@ -59,18 +59,18 @@ const Home = () => {
   }
 
   return (
-    <div className="w-full max-w-[1280px] mx-auto px-4 pt-8 pb-32">
-      
+    <div className="w-full">
       <HeroCarousel />
 
-      {/* Main News Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12">
-        <div className="md:col-span-8">
-          <h2 className="text-2xl font-bold flex items-center gap-3 mb-6">
-            <span className="w-8 h-1 bg-green-600 rounded-full"></span>
+      {/* Main News Grid - Responsivo */}
+      <div className="flex flex-col lg:flex-row gap-6 mt-8 lg:mt-12">
+        {/* Coluna principal */}
+        <div className="w-full lg:w-2/3">
+          <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-3 mb-4 sm:mb-6">
+            <span className="w-6 h-1 sm:w-8 sm:h-1 bg-green-600 rounded-full"></span>
             Principais Coberturas
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {featuredNews.length > 0 ? (
               featuredNews.map((news) => (
                 <NewsCard key={news.id} {...news} />
@@ -83,39 +83,37 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Sidebar "Mais Lidas" */}
-        <aside className="md:col-span-4">
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-            <h3 className="text-2xl font-bold mb-8 flex items-center justify-between">
+        {/* Sidebar - Mais Lidas */}
+        <aside className="w-full lg:w-1/3 mt-6 lg:mt-0">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 flex items-center justify-between">
               Mais Lidas
-              {/* Ícone trending_up na cor VERDE (#1e6b4c) */}
-              <span className="material-symbols-outlined text-[#1e6b4c] text-3xl">trending_up</span>
+              <span className="material-symbols-outlined text-green-600 text-2xl sm:text-3xl">trending_up</span>
             </h3>
-            <div className="space-y-8">
+            <div className="space-y-4 sm:space-y-6">
               {trendingTopics.map((topic, idx) => (
                 <div 
                   key={idx} 
-                  className="flex gap-5 cursor-pointer group" 
+                  className="flex gap-3 sm:gap-4 cursor-pointer group" 
                   onClick={() => handleReadMore(topic.id)}
                 >
-                  <span className="text-4xl font-black text-gray-300 group-hover:text-[#1e6b4c] transition-colors">
+                  <span className="text-2xl sm:text-3xl font-black text-gray-300 group-hover:text-green-600 transition-colors">
                     {topic.rank}
                   </span>
                   <div className="flex-1">
-                    <p className="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-[#1e6b4c] transition-colors leading-relaxed">
+                    <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200 group-hover:text-green-600 transition-colors leading-relaxed">
                       {topic.title}
                     </p>
-                    <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold mt-2 inline-block">
+                    <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1 inline-block">
                       {topic.category}
                     </span>
                   </div>
                 </div>
               ))}
             </div>
-            {/* Botão VER RANKING COMPLETO na cor VERDE */}
             <button 
               onClick={() => navigate('/todas-noticias')}
-              className="w-full mt-10 py-4 border-2 border-[#1e6b4c] text-[#1e6b4c] rounded-xl text-base font-bold hover:bg-[#1e6b4c] hover:text-white transition-colors"
+              className="w-full mt-6 sm:mt-8 py-2 sm:py-3 border-2 border-green-600 text-green-600 rounded-lg text-sm sm:text-base font-bold hover:bg-green-600 hover:text-white transition-colors"
             >
               VER RANKING COMPLETO
             </button>
@@ -123,24 +121,24 @@ const Home = () => {
         </aside>
       </div>
 
-      {/* Secondary News Grid */}
+      {/* Secondary News Grid - Responsivo */}
       {secondaryNews.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
           {secondaryNews.map((news) => (
             <NewsCard key={news.id} {...news} />
           ))}
         </div>
       )}
 
-      {/* Video Section */}
-      <section className="mt-16">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Amazônia em Foco</h2>
-          <button onClick={handleViewAllVideos} className="text-[#1e6b4c] hover:underline text-sm">
+      {/* Video Section - Responsivo */}
+      <section className="mt-12 sm:mt-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold">Amazônia em Foco</h2>
+          <button onClick={handleViewAllVideos} className="text-green-600 hover:underline text-sm">
             Ver todos os vídeos →
           </button>
         </div>
-        <div className="flex overflow-x-auto gap-6 pb-4">
+        <div className="flex overflow-x-auto gap-4 sm:gap-6 pb-4 scrollbar-thin">
           {videos.length > 0 ? (
             videos.map((video) => <VideoCard key={video.id} {...video} />)
           ) : (

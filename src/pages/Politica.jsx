@@ -48,7 +48,7 @@ const Politica = () => {
           Política
         </h1>
         <p className="text-gray-600 max-w-2xl">
-          Acompanhe a análise técnica e profunda sobre o poder na maior floresta tropical do mundo.
+          Acompanhe a análise técnica e profunda sobre o poder político.
         </p>
       </div>
 
@@ -59,7 +59,7 @@ const Politica = () => {
             onClick={() => navigate('/admin/editor')}
             className="mt-4 text-green-600 hover:underline"
           >
-            Criar primeiro artigo →
+            {/* Adicionar artigo no admin (Opção pode ser desmarcada caso nescessario para testes fututos*/} 
           </button>
         </div>
       ) : (
@@ -68,7 +68,7 @@ const Politica = () => {
             <div
               key={article.id}
               onClick={() => handleReadMore(article.id)}
-              className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-all duration-300"
+              className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col"
             >
               {article.imageUrl && (
                 <div className="aspect-video w-full overflow-hidden bg-gray-100">
@@ -79,17 +79,19 @@ const Politica = () => {
                   />
                 </div>
               )}
-              <div className="p-5">
+              <div className="p-5 flex-1 flex flex-col">
                 <span className="text-xs font-semibold uppercase text-green-600">
                   {article.category}
                 </span>
-                <h3 className="text-lg font-bold text-gray-900 mt-2 mb-2 leading-tight group-hover:text-green-600 transition-colors line-clamp-2">
+                {/* Título SEM line-clamp - completo */}
+                <h3 className="text-lg font-bold text-gray-900 mt-2 mb-2 leading-tight group-hover:text-green-600 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+                {/* Descrição SEM line-clamp - completa */}
+                <p className="text-gray-600 text-sm mb-3 flex-1">
                   {article.description}
                 </p>
-                <div className="flex items-center justify-between text-gray-400 text-xs">
+                <div className="flex items-center justify-between text-gray-400 text-xs mt-auto">
                   <div className="flex items-center gap-1">
                     <span className="material-symbols-outlined text-sm">schedule</span>
                     <span>{article.readTime} min</span>

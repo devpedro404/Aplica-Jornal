@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;700;800&family=Literata:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;700;800&family=Literata:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @layer base {
   body {
     min-height: max(884px, 100dvh);
+    font-family: 'Inter', 'Literata', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Chivo', 'Inter', sans-serif;
   }
 }
 
@@ -26,23 +31,13 @@
   }
   
   .news-ticker-mask {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
@@ -64,12 +59,8 @@
 }
 
 @keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 .animate-slide-in {
@@ -83,43 +74,17 @@
   box-shadow: 0 4px 20px rgba(15, 61, 46, 0.05);
 }
 
-/* Admin - Correções de contraste */
-.bg-primary-container {
-  background-color: #0f3d2e !important;
-}
-
-.text-on-primary-container {
-  color: #7ba894 !important;
-}
-
+/* Admin */
+.bg-primary-container { background-color: #0f3d2e !important; }
+.text-on-primary-container { color: #7ba894 !important; }
 .bg-primary-container .text-white,
-.bg-primary-container .text-on-primary {
-  color: #ffffff !important;
-}
+.bg-primary-container .text-on-primary { color: #ffffff !important; }
+.admin-card-text { color: #191c1d !important; }
+.admin-label { color: #414944 !important; font-weight: 500 !important; }
+.admin-value { color: #00261a !important; font-weight: 600 !important; }
 
-.admin-card-text {
-  color: #191c1d !important;
-}
-
-.admin-label {
-  color: #414944 !important;
-  font-weight: 500 !important;
-}
-
-.admin-value {
-  color: #00261a !important;
-  font-weight: 600 !important;
-}
-
-input[type="checkbox"].sr-only:checked + div {
-  background-color: #1e6b4c !important;
-}
-
-input[type="checkbox"].sr-only + div {
-  background-color: #c0c8c3 !important;
-  transition: all 0.2s ease;
-}
-
+input[type="checkbox"].sr-only:checked + div { background-color: #1e6b4c !important; }
+input[type="checkbox"].sr-only + div { background-color: #c0c8c3 !important; transition: all 0.2s ease; }
 input[type="checkbox"].sr-only + div:after {
   content: '';
   position: absolute;
@@ -131,74 +96,68 @@ input[type="checkbox"].sr-only + div:after {
   width: 12px;
   transition: all 0.2s ease;
 }
+input[type="checkbox"].sr-only:checked + div:after { transform: translateX(14px); }
 
-input[type="checkbox"].sr-only:checked + div:after {
-  transform: translateX(14px);
-}
-
-select, 
-input, 
-textarea {
+select, input, textarea {
   background-color: #ffffff !important;
   color: #191c1d !important;
   border-color: #c0c8c3 !important;
 }
-
-select:focus, 
-input:focus, 
-textarea:focus {
+select:focus, input:focus, textarea:focus {
   border-color: #1e6b4c !important;
   outline: none !important;
-  ring-color: #1e6b4c !important;
 }
-
-select option {
-  background-color: #ffffff !important;
-  color: #191c1d !important;
-}
+select option { background-color: #ffffff !important; color: #191c1d !important; }
 
 .btn-outline {
   background-color: transparent !important;
   border: 1px solid #1e6b4c !important;
   color: #1e6b4c !important;
 }
-
 .btn-outline:hover {
   background-color: #1e6b4c !important;
   color: #ffffff !important;
 }
 
-.text-on-surface {
-  color: #191c1d !important;
-}
-
-.text-on-surface-variant {
-  color: #414944 !important;
-}
-
-.text-secondary {
-  color: #1e6b4c !important;
-}
-
-.text-primary {
-  color: #00261a !important;
-}
+.text-on-surface { color: #191c1d !important; }
+.text-on-surface-variant { color: #414944 !important; }
+.text-secondary { color: #1e6b4c !important; }
+.text-primary { color: #00261a !important; }
 
 /* ============================================
-   TEMA ESCURO - MANTENDO IDENTIDADE
+   TEMA CLARO (PADRÃO)
    ============================================ */
 
-.dark {
-  --bg-color: #121212;
-  --text-color: #e5e5e5;
+body {
+  background-color: #f8f9fa;
+  color: #1f2937;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #111827;
+}
+
+p, span, li {
+  color: #374151;
+}
+
+.text-gray-400 { color: #6b7280 !important; }
+.text-gray-500 { color: #6b7280 !important; }
+.text-gray-600 { color: #4b5563 !important; }
+.text-gray-700 { color: #374151 !important; }
+.text-gray-800 { color: #1f2937 !important; }
+.text-gray-900 { color: #111827 !important; }
+.text-green-600 { color: #15803d !important; }
+
+/* ============================================
+   TEMA ESCURO - APENAS BRANCO, SEM VERDE E SEM BORDAS
+   ============================================ */
 
 .dark body {
   background-color: #121212;
-  color: #e5e5e5;
 }
 
-/* Fundos escuros */
+/* FUNDOS ESCUROS */
 .dark .bg-white,
 .dark .bg-surface,
 .dark .bg-background,
@@ -215,112 +174,105 @@ select option {
 .dark .bg-white.shadow-lg,
 .dark .bg-white.shadow-sm,
 .dark aside.bg-surface,
-.dark .bg-white.dark\:bg-gray-800 {
-  background-color: #1a1a1a !important;
-}
-
-/* Header escuro */
+.dark .bg-white.dark\:bg-gray-800,
+.dark article,
+.dark .card,
 .dark header,
 .dark .fixed.top-0,
 .dark .bg-white\/90,
-.dark .backdrop-blur-xl {
+.dark .backdrop-blur-xl,
+.dark footer.bg-primary,
+.dark .drawer-menu,
+.dark .fixed.top-0.left-0.bg-white {
   background-color: #1a1a1a !important;
-  border-bottom-color: #2a2a2a !important;
 }
 
-/* Ícones do header - BRANCOS */
-.dark header .material-symbols-outlined {
-  color: #ffffff !important;
-}
-
-.dark header button:hover .material-symbols-outlined {
-  color: #cccccc !important;
-}
-
-/* Links do menu do header - BRANCOS */
-.dark header nav a,
-.dark header .menu-item {
-  color: #e0e0e0 !important;
-}
-
-.dark header nav a:hover,
-.dark header .menu-item:hover {
-  color: #ffffff !important;
-}
-
-/* Textos principais - BRANCOS */
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
-.dark .font-bold, .dark .font-semibold,
-.dark .font-headline-lg, .dark .font-headline-md, .dark .font-display-lg,
-.dark .text-primary,
-.dark .text-gray-900,
-.dark .text-gray-800,
-.dark .text-gray-700 {
-  color: #ffffff !important;
-}
-
-.dark p, .dark span, .dark li,
-.dark .text-gray-600,
-.dark .text-gray-500,
-.dark .text-gray-400,
-.dark .text-on-surface-variant {
-  color: #c0c0c0 !important;
-}
-
-/* APENAS LINKS PRINCIPAIS FICAM VERDES */
-.dark a:not(header a):not(.no-green) {
-  color: #4ade80 !important;
-}
-
-.dark a:not(header a):not(.no-green):hover {
-  color: #22c55e !important;
-}
-
-/* Botão "Ver todos os vídeos" - BRANCO/CINZA (não verde) */
-.dark .text-secondary:where(.video-link, [class*="video"]) {
-  color: #c0c0c0 !important;
-}
-
-.dark button:not(.bg-secondary):not(.bg-primary) {
-  color: #e0e0e0 !important;
-}
-
-/* Botão "Ver ranking completo" - BRANCO */
-.dark .ranking-button,
-.dark button.border-primary {
-  color: #e0e0e0 !important;
-  border-color: #4ade80 !important;
-}
-
-.dark .ranking-button:hover,
-.dark button.border-primary:hover {
-  background-color: #4ade80 !important;
-  color: #1a1a1a !important;
-}
-
-/* Categorias verdes - manter */
-.dark .text-secondary {
-  color: #4ade80 !important;
-}
-
-/* Bordas */
-.dark .border,
-.dark .border-t,
-.dark .border-b,
-.dark .border-gray-100,
-.dark .border-gray-200,
-.dark .border-gray-300,
-.dark .border-outline-variant {
-  border-color: #2a2a2a !important;
-}
-
-/* Cards - SEM EFEITO VERDE NO HOVER */
+/* REMOVER BORDAS BRANCAS DOS CARDS */
 .dark article,
 .dark .card,
 .dark .rounded-xl,
 .dark .rounded-lg {
-  background-color: #1a1a1a !important;
   border-color: #2a2a2a !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+
+/* TODOS OS TEXTOS NO TEMA ESCURO - APENAS BRANCO */
+.dark,
+.dark *,
+.dark body,
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark .font-bold, .dark .font-semibold,
+.dark .font-headline-lg, .dark .font-headline-md, .dark .font-display-lg,
+.dark .text-primary, .dark .text-gray-900, .dark .text-gray-800, .dark .text-gray-700,
+.dark .text-gray-600, .dark .text-gray-500, .dark .text-gray-400,
+.dark p, .dark span, .dark li,
+.dark .text-on-surface, .dark .text-on-surface-variant,
+.dark .text-sm, .dark .text-xs, .dark .text-base, .dark .text-lg,
+.dark article, .dark .card,
+.dark article p, .dark .card p,
+.dark article h3, .dark .card h3, .dark article h4, .dark .card h4,
+.dark .flex.items-center span,
+.dark .flex.items-center.justify-between span,
+.dark [class*="schedule"],
+.dark .material-symbols-outlined,
+.dark .text-white,
+.dark .text-black,
+.dark .text-gray-100,
+.dark .text-gray-200,
+.dark .text-gray-300,
+.dark .text-gray-400,
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700,
+.dark .text-gray-800,
+.dark .text-gray-900 {
+  color: #ffffff !important;
+}
+
+/* REMOVER VERDE DOS LINKS DO MENU - TEXTO BRANCO */
+.dark header nav a,
+.dark header .menu-item,
+.dark header a {
+  color: #ffffff !important;
+}
+.dark header nav a:hover,
+.dark header .menu-item:hover,
+.dark header a:hover {
+  color: #cccccc !important;
+}
+
+/* REMOVER VERDE DOS LINKS EM GERAL */
+.dark a:not(.keep-green) {
+  color: #ffffff !important;
+}
+.dark a:not(.keep-green):hover {
+  color: #cccccc !important;
+}
+
+/* CATEGORIA - BRANCA (SEM VERDE) */
+.dark .text-xs.font-semibold.uppercase.text-green-600,
+.dark .text-green-600,
+.dark .text-green-500,
+.dark .text-green-400 {
+  color: #ffffff !important;
+}
+
+/* Footer texto */
+.dark footer .text-on-primary {
+  color: #ffffff !important;
+}
+.dark footer .text-on-primary\/70 {
+  color: #cccccc !important;
+}
+
+/* Menu drawer */
+.dark .drawer-menu a {
+  color: #ffffff !important;
+}
+.dark .drawer-menu a:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
 }
 
 /* Inputs */
@@ -331,108 +283,28 @@ select option {
   border-color: #3a3a3a !important;
   color: #ffffff !important;
 }
-
 .dark input::placeholder,
 .dark textarea::placeholder {
   color: #888888 !important;
 }
-
 .dark input:focus,
 .dark textarea:focus,
 .dark select:focus {
-  border-color: #4ade80 !important;
+  border-color: #666666 !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2) !important;
 }
 
-/* Botões principais - VERDES */
+/* Botões */
+.dark button {
+  color: #ffffff !important;
+}
 .dark button.bg-primary,
 .dark .bg-primary {
-  background-color: #1e6b4c !important;
+  background-color: #333333 !important;
   color: #ffffff !important;
 }
-
-.dark button.bg-primary:hover,
-.dark .bg-primary:hover {
-  background-color: #15573e !important;
-}
-
 .dark .bg-secondary {
-  background-color: #22c55e !important;
-  color: #ffffff !important;
-}
-
-.dark .bg-secondary:hover {
-  background-color: #16a34a !important;
-}
-
-/* Footer */
-.dark footer.bg-primary {
-  background-color: #0a1a15 !important;
-}
-
-.dark footer .text-on-primary {
-  color: #e5e5e5 !important;
-}
-
-.dark footer .text-on-primary\/70 {
-  color: #888888 !important;
-}
-
-/* Menu drawer */
-.dark .drawer-menu,
-.dark .fixed.top-0.left-0.bg-white {
-  background-color: #1a1a1a !important;
-}
-
-.dark .drawer-menu a:hover {
-  background-color: #1e6b4c !important;
-}
-
-/* Mais Lidas - SEM VERDE NO HOVER */
-.dark .text-gray-500,
-.dark .text-gray-600 {
-  color: #888888 !important;
-}
-
-.dark .group:hover .text-gray-500,
-.dark .group:hover .text-gray-600 {
-  color: #888888 !important;
-}
-
-.dark .group:hover h4 {
-  color: #ffffff !important;
-}
-
-/* Newsletter */
-.dark .bg-primary-container {
-  background-color: #0a2b1f !important;
-}
-
-.dark .bg-primary-container h2,
-.dark .bg-primary-container p {
-  color: #ffffff !important;
-}
-
-.dark .bg-primary-container button {
-  background-color: #22c55e !important;
-}
-
-.dark .bg-primary-container button:hover {
-  background-color: #16a34a !important;
-}
-
-/* Ticker Urgente */
-.dark .bg-red-600 {
-  background-color: #991b1b !important;
-}
-
-.dark .urgent-label {
-  background-color: #000000 !important;
-  color: #ef4444 !important;
-}
-
-.dark .news-ticker-mask span {
+  background-color: #444444 !important;
   color: #ffffff !important;
 }
 
@@ -440,90 +312,67 @@ select option {
 .dark ::-webkit-scrollbar-track {
   background: #1a1a1a;
 }
-
 .dark ::-webkit-scrollbar-thumb {
   background: #3a3a3a;
   border-radius: 10px;
 }
-
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #4a4a4a;
 }
 
-/* Admin escuro */
-.dark .bg-gray-50 {
-  background-color: #111111 !important;
+/* Ticker Urgente - mantém vermelho */
+.dark .bg-red-600 {
+  background-color: #991b1b !important;
+}
+.dark .urgent-label {
+  background-color: #000000 !important;
+  color: #ef4444 !important;
+}
+.dark .news-ticker-mask span {
+  color: #ffffff !important;
 }
 
-.dark .bg-gray-100 {
+/* Newsletter */
+.dark .bg-primary-container {
   background-color: #1a1a1a !important;
 }
-
-.dark .text-gray-600,
-.dark .text-gray-500,
-.dark .text-gray-400 {
-  color: #a0a0a0 !important;
+.dark .bg-primary-container h2,
+.dark .bg-primary-container p {
+  color: #ffffff !important;
+}
+.dark .bg-primary-container button {
+  background-color: #333333 !important;
+  color: #ffffff !important;
 }
 
-.dark .text-gray-700,
-.dark .text-gray-800 {
-  color: #e0e0e0 !important;
+/* Hero carousel texto */
+.dark .text-white {
+  color: #ffffff !important;
 }
 
-.dark .bg-primary {
-  background-color: #1e6b4c !important;
-}
-
-.dark .bg-primary:hover {
-  background-color: #15573e !important;
-}
-
-/* Checkbox */
-.dark input[type="checkbox"].sr-only + div {
-  background-color: #3a3a3a !important;
-}
-
-.dark input[type="checkbox"].sr-only:checked + div {
-  background-color: #22c55e !important;
-}
-
-/* Hero carousel */
-.dark .bg-black\/20,
-.dark .bg-black\/50 {
-  background-color: rgba(0, 0, 0, 0.6) !important;
-}
-
-.dark .hero-gradient {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%) !important;
-}
-
-/* Header com scroll transparente */
+/* Header com scroll */
 header {
   transition: all 0.3s ease-in-out !important;
 }
-
 header.bg-white\/80,
 header.backdrop-blur-md {
   background-color: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(12px) !important;
 }
-
 .dark header.bg-white\/80,
 .dark header.backdrop-blur-md {
   background-color: rgba(26, 26, 26, 0.85) !important;
   backdrop-filter: blur(12px) !important;
 }
-
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 /* ============================================
-   REMOVER TODO EFEITO VERDE DOS CARDS
+   REMOVER EFEITOS DE HOVER
    ============================================ */
 
-/* Remove qualquer efeito de hover nos cards */
 article:hover,
 .card:hover {
   transform: none !important;
@@ -531,42 +380,150 @@ article:hover,
   border-color: inherit !important;
 }
 
-/* Remove qualquer cor verde nos títulos ao passar o mouse */
 article:hover h3,
 article:hover h4,
 .card:hover h3,
-.card:hover h4,
-article:hover .font-bold,
-.card:hover .font-bold {
+.card:hover h4 {
   color: inherit !important;
 }
 
-/* Remove borda verde no dark mode */
 .dark article:hover,
 .dark .card:hover {
   border-color: #2a2a2a !important;
 }
 
-/* Remove qualquer efeito de escala ou movimento */
-article,
-.card-clickable,
-.cursor-pointer {
+article, .card-clickable, .cursor-pointer {
   transition: none !important;
 }
 
-/* Remove efeito verde dos links dentro dos cards */
-article a:hover,
-.card a:hover {
-  color: inherit !important;
+/* ============================================
+   TAMANHOS OTIMIZADOS
+   ============================================ */
+
+article h3, .card h3, article h4, .card h4 {
+  font-size: 1.125rem !important;
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
 }
 
-/* Remove efeito verde do "Mais Lidas" */
-.dark .group:hover h4 {
+article p, .card p {
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+article .text-xs, .card .text-xs {
+  font-size: 0.7rem !important;
+}
+
+article .material-symbols-outlined,
+.card .material-symbols-outlined {
+  font-size: 0.875rem !important;
+}
+
+/* ============================================
+   CORREÇÃO DO FOOTER NO TEMA ESCURO
+   ============================================ */
+
+/* Footer no tema escuro - manter cor verde original */
+.dark footer.bg-primary {
+  background-color: #0a1a15 !important;
+}
+
+.dark footer .text-white,
+.dark footer .text-on-primary {
   color: #ffffff !important;
 }
 
-.dark .group:hover .text-gray-500,
-.dark .group:hover .text-gray-600 {
-  color: #888888 !important;
+.dark footer .text-white\/80,
+.dark footer .text-on-primary\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
+.dark footer .text-white\/70,
+.dark footer .text-on-primary\/70 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark footer .text-white\/30,
+.dark footer .text-on-primary\/30 {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Links do footer no tema escuro - verde no hover */
+.dark footer a {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark footer a:hover {
+  color: #4ade80 !important;
+}
+
+/* Ícones do footer no tema escuro */
+.dark footer .material-symbols-outlined {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Redes sociais no footer */
+.dark footer .rounded-full.bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark footer .rounded-full.bg-white\/10:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ============================================
+   MENU HAMBÚRGUER - TEMA ESCURO
+   ============================================ */
+
+/* Fundo do menu drawer no tema escuro */
+.dark .fixed.top-0.left-0.h-full.bg-white {
+  background-color: #1a1a1a !important;
+}
+
+/* Textos do menu no tema escuro */
+.dark .drawer-menu span,
+.dark .fixed.top-0.left-0.h-full span:not(.material-symbols-outlined) {
+  color: #ffffff !important;
+}
+
+/* Ícones do menu no tema escuro */
+.dark .fixed.top-0.left-0.h-full .material-symbols-outlined {
+  color: #ffffff !important;
+}
+
+/* Links do menu no tema escuro - normal */
+.dark .drawer-menu a:not(.active) {
+  color: #ffffff !important;
+}
+
+/* Links do menu no tema escuro - hover */
+.dark .drawer-menu a:hover {
+  background-color: #2a2a2a !important;
+  color: #4ade80 !important;
+}
+
+.dark .drawer-menu a:hover .material-symbols-outlined {
+  color: #4ade80 !important;
+}
+
+/* Link ativo no menu escuro */
+.dark .drawer-menu a.bg-green-100,
+.dark .drawer-menu a.bg-green-900\/50 {
+  background-color: #1e6b4c !important;
+  color: #ffffff !important;
+}
+
+.dark .drawer-menu a.bg-green-100 .material-symbols-outlined,
+.dark .drawer-menu a.bg-green-900\/50 .material-symbols-outlined {
+  color: #ffffff !important;
+}
+
+/* Botão fechar */
+.dark .fixed.top-0.left-0.h-full button:hover {
+  background-color: #2a2a2a !important;
+}
+
+.dark .fixed.top-0.left-0.h-full button:hover .material-symbols-outlined {
+  color: #ffffff !important;
+}

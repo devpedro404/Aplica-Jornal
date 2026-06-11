@@ -15,8 +15,8 @@ import Seguranca from './pages/Seguranca';
 import TodasNoticias from './pages/TodasNoticias';
 import Videos from './pages/Videos';
 import ArticleDetail from './pages/article/ArticleDetail';
-import Opiniao from './pages/Opiniao';
-import Geral from './pages/Geral';
+// REMOVIDO: import Opiniao from './pages/Opiniao';
+// REMOVIDO: import Geral from './pages/Geral';
 
 // Admin Pages
 import Login from './admin/pages/Login';
@@ -42,8 +42,8 @@ function App() {
             <Route path="/cultura" element={<Layout><Cultura /></Layout>} />
             <Route path="/negocios" element={<Layout><Negocios /></Layout>} />
             <Route path="/seguranca" element={<Layout><Seguranca /></Layout>} />
-            <Route path="/opiniao" element={<Layout><Opiniao /></Layout>} />
-            <Route path="/geral" element={<Layout><Geral /></Layout>} />
+            {/* REMOVIDO: <Route path="/opiniao" element={<Layout><Opiniao /></Layout>} /> */}
+            {/* REMOVIDO: <Route path="/geral" element={<Layout><Geral /></Layout>} /> */}
             <Route path="/todas-noticias" element={<Layout><TodasNoticias /></Layout>} />
             <Route path="/videos" element={<Layout><Videos /></Layout>} />
             <Route path="/article/:id" element={<Layout><ArticleDetail /></Layout>} />

@@ -10,13 +10,14 @@ const VideosManager = () => {
     title: '',
     description: '',
     videoUrl: '',
-    category: '',
+    category: 'Podcast',
     featured: false
   });
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
 
-  const categories = ['Documentário', 'Natureza', 'Sustentabilidade', 'Biodiversidade', 'Cultura', 'Meio Ambiente'];
+  // Apenas a categoria Podcast
+  const categories = ['Podcast'];
 
   useEffect(() => {
     loadVideos();
@@ -34,7 +35,7 @@ const VideosManager = () => {
         title: video.title,
         description: video.description,
         videoUrl: video.videoUrl,
-        category: video.category,
+        category: video.category || 'Podcast',
         featured: video.featured
       });
     } else {
@@ -43,7 +44,7 @@ const VideosManager = () => {
         title: '',
         description: '',
         videoUrl: '',
-        category: categories[0],
+        category: 'Podcast',
         featured: false
       });
     }
@@ -57,7 +58,7 @@ const VideosManager = () => {
       title: '',
       description: '',
       videoUrl: '',
-      category: categories[0],
+      category: 'Podcast',
       featured: false
     });
   };
@@ -74,29 +75,33 @@ const VideosManager = () => {
     e.preventDefault();
     
     if (!formData.title.trim()) {
-      showMessage('Por favor, insira o título do vídeo!', 'error');
+      showMessage('Por favor, insira o título do episódio!');
       return;
     }
     
     if (!formData.videoUrl.trim()) {
-      showMessage('Por favor, insira a URL do vídeo!', 'error');
+      showMessage('Por favor, insira a URL do vídeo!');
       return;
     }
 
     const videoId = getYouTubeId(formData.videoUrl);
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800';
     
     const videoData = {
-      ...formData,
+      title: formData.title,
+      description: formData.description,
+      videoUrl: formData.videoUrl,
+      category: 'Podcast',
+      featured: formData.featured,
       imageUrl: thumbnailUrl
     };
 
     if (editingVideo) {
       updateVideo(editingVideo.id, videoData);
-      showMessage('Vídeo atualizado com sucesso!', 'success');
+      showMessage('Episódio atualizado com sucesso!');
     } else {
       addVideo(videoData);
-      showMessage('Vídeo adicionado com sucesso!', 'success');
+      showMessage('Episódio adicionado com sucesso!');
     }
     
     handleCloseModal();
@@ -104,20 +109,20 @@ const VideosManager = () => {
   };
 
   const handleDelete = (id, title) => {
-    if (window.confirm(`Tem certeza que deseja excluir o vídeo "${title}"?`)) {
+    if (window.confirm(`Tem certeza que deseja excluir o episódio "${title}"?`)) {
       deleteVideo(id);
       loadVideos();
-      showMessage('Vídeo excluído com sucesso!', 'success');
+      showMessage('Episódio excluído com sucesso!');
     }
   };
 
   const handleToggleFeatured = (id) => {
     toggleFeatured(id);
     loadVideos();
-    showMessage('Destaque atualizado!', 'success');
+    showMessage('Destaque atualizado!');
   };
 
-  const showMessage = (message, type = 'success') => {
+  const showMessage = (message) => {
     setSnackbarMessage(message);
     setShowSnackbar(true);
     setTimeout(() => setShowSnackbar(false), 3000);
@@ -129,9 +134,9 @@ const VideosManager = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="font-headline-lg text-headline-lg text-primary text-2xl">Gerenciar Vídeos</h2>
+            <h2 className="font-headline-lg text-headline-lg text-primary text-2xl">Gerenciar Podcast</h2>
             <p className="text-sm text-on-surface-variant mt-1">
-              Gerencie os vídeos da seção "Amazônia em Foco"
+              Gerencie os episódios do podcast
             </p>
           </div>
           <button
@@ -139,90 +144,97 @@ const VideosManager = () => {
             className="px-4 py-2 bg-primary text-white rounded-lg flex items-center gap-2 hover:bg-primary/90 transition-colors"
           >
             <span className="material-symbols-outlined text-sm">add</span>
-            Novo Vídeo
+            Novo Episódio
           </button>
         </div>
 
-        {/* Lista de Vídeos */}
+        {/* Lista de Episódios */}
         <div className="bg-white rounded-lg shadow-sm border border-outline-variant/20 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-surface-container-low border-b border-outline-variant/20">
                 <tr className="text-left">
-                  <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Vídeo</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Episódio</th>
                   <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Categoria</th>
                   <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Visualizações</th>
                   <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Data</th>
                   <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant">Destaque</th>
                   <th className="px-4 py-3 text-xs font-semibold text-on-surface-variant text-right">Ações</th>
                 </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/10">
-              {videos.map((video) => (
-                <tr key={video.id} className="group hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-20 h-12 rounded overflow-hidden bg-gray-100 flex-shrink-0">
-                        <img src={video.imageUrl} alt={video.title} className="w-full h-full object-cover" />
+              </thead>
+              <tbody className="divide-y divide-outline-variant/10">
+                {videos.map((video) => (
+                  <tr key={video.id} className="group hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded overflow-hidden bg-gray-100 flex-shrink-0">
+                          <img 
+                            src={video.imageUrl} 
+                            alt={video.title} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.src = 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800';
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-800 line-clamp-1 max-w-xs">{video.title}</p>
+                          <p className="text-xs text-gray-400 mt-0.5 line-clamp-1 max-w-xs">{video.description}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-800 line-clamp-1 max-w-xs">{video.title}</p>
-                        <p className="text-xs text-gray-400 mt-0.5 line-clamp-1 max-w-xs">{video.description}</p>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-semibold rounded">
+                        {video.category}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">{video.views} views</td>
+                    <td className="px-4 py-3 text-sm text-gray-600">{video.date}</td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => handleToggleFeatured(video.id)}
+                        className={`px-2 py-1 rounded text-[10px] font-semibold transition-colors ${
+                          video.featured
+                            ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+                            : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                        }`}
+                      >
+                        {video.featured ? '★ Destaque' : '☆ Normal'}
+                      </button>
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={() => handleOpenModal(video)}
+                          className="p-1.5 hover:text-secondary rounded"
+                          title="Editar"
+                        >
+                          <span className="material-symbols-outlined text-sm">edit</span>
+                        </button>
+                        <button
+                          onClick={() => handleDelete(video.id, video.title)}
+                          className="p-1.5 hover:text-error rounded"
+                          title="Excluir"
+                        >
+                          <span className="material-symbols-outlined text-sm">delete</span>
+                        </button>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="px-2 py-0.5 bg-secondary-container/30 text-secondary text-[10px] font-semibold rounded">
-                      {video.category}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{video.views} views</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{video.date}</td>
-                  <td className="px-4 py-3">
-                    <button
-                      onClick={() => handleToggleFeatured(video.id)}
-                      className={`px-2 py-1 rounded text-[10px] font-semibold transition-colors ${
-                        video.featured
-                          ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
-                          : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                      }`}
-                    >
-                      {video.featured ? '★ Destaque' : '☆ Normal'}
-                    </button>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button
-                        onClick={() => handleOpenModal(video)}
-                        className="p-1.5 hover:text-secondary rounded"
-                        title="Editar"
-                      >
-                        <span className="material-symbols-outlined text-sm">edit</span>
-                      </button>
-                      <button
-                        onClick={() => handleDelete(video.id, video.title)}
-                        className="p-1.5 hover:text-error rounded"
-                        title="Excluir"
-                      >
-                        <span className="material-symbols-outlined text-sm">delete</span>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {/* Modal de Adicionar/Editar Vídeo */}
+        {/* Modal de Adicionar/Editar Episódio */}
         {isModalOpen && (
           <>
             <div className="fixed inset-0 bg-black/50 z-40" onClick={handleCloseModal} />
             <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-xl shadow-2xl z-50 p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-primary">
-                  {editingVideo ? 'Editar Vídeo' : 'Novo Vídeo'}
+                  {editingVideo ? 'Editar Episódio' : 'Novo Episódio'}
                 </h3>
                 <button onClick={handleCloseModal} className="text-gray-400 hover:text-gray-600">
                   <span className="material-symbols-outlined">close</span>
@@ -238,7 +250,7 @@ const VideosManager = () => {
                     value={formData.title}
                     onChange={handleInputChange}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-secondary focus:ring-0"
-                    placeholder="Título do vídeo"
+                    placeholder="Título do episódio"
                     required
                   />
                 </div>
@@ -251,7 +263,7 @@ const VideosManager = () => {
                     onChange={handleInputChange}
                     rows="3"
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-secondary focus:ring-0 resize-none"
-                    placeholder="Breve descrição do vídeo"
+                    placeholder="Breve descrição do episódio"
                   />
                 </div>
 
@@ -269,19 +281,8 @@ const VideosManager = () => {
                   <p className="text-xs text-gray-400 mt-1">Cole a URL completa do vídeo do YouTube</p>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-secondary focus:ring-0"
-                  >
-                    {categories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                </div>
+                {/* Categoria - fixa como Podcast (campo oculto) */}
+                <input type="hidden" name="category" value="Podcast" />
 
                 <div className="flex items-center gap-2">
                   <input
@@ -293,7 +294,7 @@ const VideosManager = () => {
                     className="w-4 h-4 rounded border-gray-300 text-secondary focus:ring-secondary"
                   />
                   <label htmlFor="featured" className="text-sm text-gray-700">
-                    Destacar na página inicial (aparecerá no carrossel)
+                    Destacar na página inicial (aparecerá no carrossel da Home)
                   </label>
                 </div>
 
@@ -302,7 +303,7 @@ const VideosManager = () => {
                     type="submit"
                     className="flex-1 bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition-colors"
                   >
-                    {editingVideo ? 'Salvar Alterações' : 'Adicionar Vídeo'}
+                    {editingVideo ? 'Salvar Alterações' : 'Adicionar Episódio'}
                   </button>
                   <button
                     type="button"

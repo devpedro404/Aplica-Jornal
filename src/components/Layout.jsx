@@ -15,13 +15,15 @@ const Layout = ({ children }) => {
   }, [location]);
 
   return (
-    <div className="bg-surface text-on-surface">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <ReadingProgress />
       <TopAppBar onMenuClick={() => setIsDrawerOpen(true)} />
       <DrawerMenu isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
       <BreakingNewsTicker />
-      <main className="pt-16 pb-20 md:pb-12">
-        {children}
+      <main className="pt-16">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {children}
+        </div>
       </main>
       <Footer />
     </div>

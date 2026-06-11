@@ -27,17 +27,17 @@ const DrawerMenu = ({ isOpen, onClose }) => {
     { path: '/ambiente', label: 'Ambiente', icon: 'forest' },
     { path: '/cultura', label: 'Cultura', icon: 'theater_comedy' },
     { path: '/negocios', label: 'Negócios', icon: 'payments' },
-    { path: '/videos', label: 'Vídeos', icon: 'smart_display' },
+    { path: '/videos', label: 'Podcast', icon: 'podcasts' },
     { path: '/seguranca', label: 'Segurança', icon: 'security' },
-    { path: '/opiniao', label: 'Opinião', icon: 'chat' },
-    { path: '/geral', label: 'Geral', icon: 'newspaper' },
     { path: '/todas-noticias', label: 'Todas as Notícias', icon: 'article' },
   ];
 
   const getMenuItemClass = (path) => {
-    return location.pathname === path
-      ? 'flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container font-semibold rounded-lg mx-2 transition-all'
-      : 'flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 mx-2 rounded-lg transition-all group';
+    const isActive = location.pathname === path;
+    if (isActive) {
+      return 'flex items-center gap-4 px-4 py-3 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 font-semibold rounded-lg mx-2';
+    }
+    return 'flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 mx-2 rounded-lg transition-colors';
   };
 
   if (!isOpen) return null;
@@ -49,15 +49,18 @@ const DrawerMenu = ({ isOpen, onClose }) => {
         onClick={onClose}
       />
       <aside className="fixed top-0 left-0 h-full w-80 bg-white dark:bg-gray-900 shadow-2xl z-[101] transition-transform duration-300 ease-out flex flex-col">
-        <div className="px-6 py-6 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
+        {/* Header do Menu */}
+        <div className="px-6 py-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <span className="font-headline-lg text-headline-lg text-gray-900 dark:text-white">Menu</span>
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
-            <span className="material-symbols-outlined text-gray-700 dark:text-gray-300">close</span>
+            <span className="material-symbols-outlined text-gray-700 dark:text-white">close</span>
           </button>
         </div>
+
+        {/* Links do Menu */}
         <nav className="flex-1 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => (
             <Link
@@ -71,9 +74,11 @@ const DrawerMenu = ({ isOpen, onClose }) => {
             </Link>
           ))}
         </nav>
-        <div className="p-6 border-t border-gray-200 dark:border-gray-800">
+
+        {/* Footer do Menu */}
+        <div className="p-6 border-t border-gray-200 dark:border-gray-700">
           <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
-            <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mb-2">
+            <p className="text-sm text-gray-700 dark:text-white font-medium mb-2">
               Jornalismo de impacto
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
