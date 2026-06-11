@@ -79,10 +79,10 @@ const DrawerMenu = ({ isOpen, onClose }) => {
         <div className="p-6 border-t border-gray-200 dark:border-gray-700">
           <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
             <p className="text-sm text-gray-700 dark:text-white font-medium mb-2">
-              Jornalismo de impacto
+              Breaking Point News
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              © 2024 O Melhor da Amazônia
+              © 2024 Breaking Point News
             </p>
           </div>
         </div>

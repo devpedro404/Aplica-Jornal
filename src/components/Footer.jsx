@@ -16,7 +16,10 @@ const Footer = () => {
         {/* Coluna Esquerda - Sobre */}
         <div className="text-center md:text-left max-w-md">
           <div className="font-headline-lg text-xl md:text-2xl text-white mb-3 md:mb-4">
-            O Melhor da Amazônia
+            Breaking Point News
+          </div>
+          <div className="font-headline-md text-sm md:text-base text-white/80 mb-4">
+            Notícia em Tempo Real
           </div>
           <p className="text-sm md:text-base text-white/80 leading-relaxed">
             Jornalismo independente dedicado a reportar a verdade sobre a maior
@@ -24,8 +27,8 @@ const Footer = () => {
           </p>
           <div className="mt-3 md:mt-4 flex items-center justify-center md:justify-start gap-2 text-white/70 text-xs md:text-sm">
             <span className="material-symbols-outlined text-sm md:text-base">mail</span>
-            <a href="mailto:contato@omelhordaamazonia.com.br" className="hover:text-green-400 transition-colors">
-              contato@omelhordaamazonia.com.br
+            <a href="mailto:contato@breakingpointnews.com.br" className="hover:text-green-400 transition-colors">
+              contato@breakingpointnews.com.br
             </a>
           </div>
         </div>
@@ -44,7 +47,7 @@ const Footer = () => {
           {/* Redes Sociais */}
           <div className="flex gap-3 md:gap-4">
             <a 
-              href="https://www.instagram.com/geovaneoliveira_oficial/" 
+              href="https://www.instagram.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 transition-all duration-300 transform hover:scale-110"
@@ -56,7 +59,7 @@ const Footer = () => {
             </a>
 
             <a 
-              href="https://www.facebook.com/omelhodaamazonia/" 
+              href="https://www.facebook.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1877f2] transition-all duration-300 transform hover:scale-110"
@@ -68,7 +71,7 @@ const Footer = () => {
             </a>
 
             <a 
-              href="https://twitter.com/amazoniajornal" 
+              href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-all duration-300 transform hover:scale-110"
@@ -80,7 +83,7 @@ const Footer = () => {
             </a>
 
             <a 
-              href="https://www.youtube.com/@geovanepodcast" 
+              href="https://www.youtube.com/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff0000] transition-all duration-300 transform hover:scale-110"
@@ -92,7 +95,7 @@ const Footer = () => {
             </a>
 
             <a 
-              href="https://www.linkedin.com/company/omelhordaamazonia" 
+              href="https://www.linkedin.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0077b5] transition-all duration-300 transform hover:scale-110"
@@ -108,7 +111,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="py-4 md:py-6 text-center text-white/30 text-[10px] md:text-xs uppercase tracking-[0.2em]">
-        © 2024 O Melhor da Amazônia. Jornalismo de impacto.
+        © 2024 Breaking Point News. Jornalismo de impacto.
       </div>
     </footer>
   );

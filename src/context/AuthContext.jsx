@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (email, password) => {
-    if (email === 'admin@omelhordaamazonia.com.br' && password === 'admin123') {
+    if (email === 'admin@breakingpointnews.com.br' && password === 'admin123') {
       const userData = {
         id: 1,
         name: 'Administrador',

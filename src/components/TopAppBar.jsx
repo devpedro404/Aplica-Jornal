@@ -59,7 +59,7 @@ const TopAppBar = ({ onMenuClick }) => {
           {/* Nome do Site - AGORA VISÍVEL EM TODAS AS TELAS */}
           <Link to="/" className="truncate">
             <span className="font-headline-md text-sm sm:text-base md:text-headline-md font-extrabold text-gray-900 dark:text-white uppercase tracking-tighter">
-              O Melhor da Amazônia
+              Breaking Point News 
             </span>
           </Link>
         </div>

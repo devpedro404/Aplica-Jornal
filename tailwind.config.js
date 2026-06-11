@@ -44,7 +44,7 @@ module.exports = {
         'outline-variant': '#c0c8c3',
       },
       animation: {
-        'marquee': 'marquee 30s linear infinite',
+        'marquee': 'marquee 25s linear infinite',
         'float': 'subtle-float 6s ease-in-out infinite',
       },
       keyframes: {
@@ -57,28 +57,6 @@ module.exports = {
           '50%': { transform: 'translateY(-8px)' },
         },
       },
-    },
-  },
-  plugins: [],
-}
-
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
-  darkMode: 'class',
-  theme: {
-    extend: {
-      animation: {
-        'marquee': 'marquee 25s linear infinite',
-      },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-      },
-      // ... suas outras configurações
     },
   },
   plugins: [],

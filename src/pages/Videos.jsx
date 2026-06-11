@@ -47,10 +47,10 @@ const Videos = () => {
       {/* Header */}
       <div className="mb-8 text-center md:text-left">
         <h1 className="text-3xl md:text-4xl font-bold text-primary dark:text-white mb-2">
-          Podcast
+          Podcast Breaking Point News
         </h1>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl">
-          Episódios exclusivos do podcast Geovane Oliveira, com discussões profundas sobre a Amazônia, política, cultura e muito mais.
+          Episódios exclusivos do podcast Jornalístico Breaking Point News, com discussões profundas sobre política, cultura e muito mais.
         </p>
       </div>
 
