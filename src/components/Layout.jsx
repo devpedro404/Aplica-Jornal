@@ -19,12 +19,19 @@ const Layout = ({ children }) => {
       <ReadingProgress />
       <TopAppBar onMenuClick={() => setIsDrawerOpen(true)} />
       <DrawerMenu isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+      
+      {/* Espaçador para compensar o header fixed */}
+      <div className="h-14 sm:h-16"></div>
+      
+      {/* Ticker - agora sem fixed, flui naturalmente */}
       <BreakingNewsTicker />
-      <main className="pt-16">
+      
+      <main>
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {children}
         </div>
       </main>
+      
       <Footer />
     </div>
   );

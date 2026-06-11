@@ -527,3 +527,20 @@ article .material-symbols-outlined,
 .dark .fixed.top-0.left-0.h-full button:hover .material-symbols-outlined {
   color: #ffffff !important;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

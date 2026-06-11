@@ -16,10 +16,9 @@ const TopAppBar = ({ onMenuClick }) => {
 
   const getNavLinkClass = (path) => {
     const isActive = location.pathname === path;
-    if (isActive) {
-      return 'font-label-md text-label-md text-green-700 dark:text-green-400 font-bold';
-    }
-    return 'font-label-md text-label-md text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400';
+    return isActive
+      ? 'font-label-md text-label-md text-green-700 dark:text-green-400 font-bold'
+      : 'font-label-md text-label-md text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400';
   };
 
   return (
@@ -30,22 +29,26 @@ const TopAppBar = ({ onMenuClick }) => {
           : 'bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800'
       }`}
     >
-      <div className="flex justify-between items-center px-4 md:px-8 h-16 w-full max-w-7xl mx-auto">
+      <div className="flex justify-between items-center px-3 sm:px-4 md:px-8 h-14 sm:h-16 w-full max-w-7xl mx-auto">
+        
         {/* Lado esquerdo - Menu + Logo + Nome */}
-        <div className="flex items-center gap-3">
-          {/* Botão Menu */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+          {/* Botão Menu - sempre visível */}
           <button
             onClick={onMenuClick}
-            className="text-gray-800 dark:text-gray-200"
+            className="flex-shrink-0 text-gray-800 dark:text-gray-200 p-1"
+            aria-label="Menu"
           >
-            <span className="material-symbols-outlined">menu</span>
+            <span className="material-symbols-outlined text-2xl">menu</span>
           </button>
 
-          {/* Logo */}
+          
+
+          {/* Logo - visível sempre */}
           <Link to="/" className="flex-shrink-0">
             <img
-              alt="Logo"
-              className="h-8 w-auto object-contain"
+              alt="Logo O Melhor da Amazônia"
+              className="h-7 sm:h-8 w-auto object-contain"
               src="/logo.png"
               onError={(e) => { 
                 e.target.style.display = 'none';
@@ -53,16 +56,16 @@ const TopAppBar = ({ onMenuClick }) => {
             />
           </Link>
 
-          {/* Nome do Site */}
-          <Link to="/" className="hidden sm:block">
-            <span className="font-headline-md text-headline-md font-extrabold text-gray-900 dark:text-white uppercase tracking-tighter">
+          {/* Nome do Site - AGORA VISÍVEL EM TODAS AS TELAS */}
+          <Link to="/" className="truncate">
+            <span className="font-headline-md text-sm sm:text-base md:text-headline-md font-extrabold text-gray-900 dark:text-white uppercase tracking-tighter">
               O Melhor da Amazônia
             </span>
           </Link>
         </div>
 
-        {/* Desktop Navigation - Links centrais */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Navegação Desktop - Links centrais */}
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
           <Link to="/" className={getNavLinkClass('/')}>
             Início
           </Link>
@@ -84,10 +87,10 @@ const TopAppBar = ({ onMenuClick }) => {
         </div>
 
         {/* Ações direita */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
           <ThemeToggle />
-          <button className="text-gray-800 dark:text-gray-200">
-            <span className="material-symbols-outlined">search</span>
+          <button className="text-gray-800 dark:text-gray-200 p-1" aria-label="Buscar">
+            <span className="material-symbols-outlined text-xl sm:text-2xl">search</span>
           </button>
         </div>
       </div>
