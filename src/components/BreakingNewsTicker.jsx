@@ -11,6 +11,7 @@ const BreakingNewsTicker = () => {
 
   const duplicatedNews = [...newsItems, ...newsItems];
 
+  // Remove as funções inline e cria funções nomeadas
   const handleMouseEnter = () => {
     if (tickerRef.current) {
       tickerRef.current.style.animationPlayState = 'paused';
