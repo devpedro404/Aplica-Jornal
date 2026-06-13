@@ -113,7 +113,7 @@ const Login = () => {
                     border: 'none',
                     backgroundColor: isDark ? '#1f2937' : '#ffffff',
                   }}
-                  placeholder="admin@omelhordaamazonia.com.br"
+                  placeholder="Digite o seu email"
                   required
                 />
               </div>
