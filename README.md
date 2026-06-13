@@ -124,3 +124,7 @@ O sirte estará disponivel em http://localhost:3000
 |/article/:id   | Detalhe do Artigo | Página completa do artigo
 
 ---
+
+### 👨‍💻 Autor
+
+Desenvolvido por devpedro404 - devpedro@gmail.com
